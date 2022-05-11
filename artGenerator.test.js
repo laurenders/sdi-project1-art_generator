@@ -1,1 +1,1 @@
-const artGenerator = require('../src').artGenerator;
+const artGenerator = require('./').artGenerator;
