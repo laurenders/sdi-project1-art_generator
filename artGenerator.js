@@ -14,6 +14,9 @@
 
 // let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=' + `${buttonID}`
 
+const clickHandler = (artist) => {
+  console.log(artist)
+}
 
 
 /////////////////////////////////////////////////////////////////////////////
