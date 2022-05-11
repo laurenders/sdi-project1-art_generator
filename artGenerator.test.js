@@ -1,0 +1,1 @@
+const artGenerator = require('../src').artGenerator;
