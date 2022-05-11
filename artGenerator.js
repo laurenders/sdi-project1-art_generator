@@ -1,5 +1,7 @@
-import fetch from 'node-fetch';
-import fs from "fs";
+// import fetch from 'node-fetch';
+// import fs from "fs";
+// Don't need fetch since we are performing fetch request in browser not node, browsers have their own version of fetch
+
 
 /////////////////////////////////////////////////////////////////////////////
 // STEP 1: Get User Input (user clicks Artist button)
