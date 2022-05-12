@@ -10,14 +10,26 @@
 // Get selection from user click event, which returns an artist 
 // Based on selected artist, append that artist's name to artist URL
 
-// let selection = userClickEvent()
-
-// let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=' + `${buttonID}`
+let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=' 
 
 const clickHandler = (artist) => {
-  console.log(artist)
-}
+  // console.log(artist)
 
+  if (artist =='vangogh') {
+    artistURL += 'vincent%20van%20gogh'
+  } 
+  else if (artist == 'monet') {
+    artistURL += 'claude%20monet'
+  }
+
+  else if (artist == 'warhol') {
+    artistURL += 'andy%20warhol'
+
+  } else {
+    artistURL += 'edward%20hopper'
+  }
+
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // STEP 2: Get a list of Object Record IDs for that artist (2 fetches)
