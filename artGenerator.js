@@ -7,12 +7,12 @@ let title = document.getElementById("title");
 let year = document.getElementById("date");
 let artistName = document.getElementById("artist");
 let imgURL = document.getElementById("image");
+let testImage = '';
 let keywordName;
 
 
 const clickHandler = (button) => {
 
-  // let keywordURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q='
   let keywordURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
 
   if (button === 'keyword1') {
@@ -33,19 +33,23 @@ const clickHandler = (button) => {
     keywordName = 'Auguste Renoir'
   }
 
-  // FIRST FETCH: get list of objects for the culture you're interested in
-
+  ////////////////////////////////////////////////////////////////////////
+  // FIRST FETCH: gives you access to a list of all art pieces for that artist
+  ////////////////////////////////////////////////////////////////////////
+  
   fetch(keywordURL)
 
   .then((res) => {
-    console.log(res.status);
+    //console.log(res.status);
     return res.json();
   })
 
+  // start while loop
+
   .then(data => {
-      console.log(data)
+      //console.log(data)
       let objectArr = data.objectIDs;
-      console.log(objectArr)
+      //console.log(objectArr)
       let randIndex = Math.floor(Math.random() * objectArr.length);
       let randObjID = objectArr[randIndex];
       return randObjID;
@@ -53,18 +57,23 @@ const clickHandler = (button) => {
 
   .then(randObjID => {
     let artURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randObjID
-    
-    // SECOND FETCH: get information on the randomly selected piece of art
 
-    fetch(artURL)
+    
+    ////////////////////////////////////////////////////////////////////////
+    // SECOND FETCH: gives you access to information on the selected art piece
+    ////////////////////////////////////////////////////////////////////////
+    
+  fetch(artURL)
 
       .then((res2) => {
         return res2.json();
       })
 
+      // working with the information about the art piece
       .then((data2) => {
         console.log(data2.artistDisplayName);
-        if (keywordName === data2.artistDisplayName) {
+
+        if (keywordName === data2.artistDisplayName && data2.primaryImage !== '') {
           
           title.innerHTML = data2.title;
           year.innerHTML = data2.objectEndDate;
@@ -76,13 +85,15 @@ const clickHandler = (button) => {
         } else {
           return;
         }
-      })
-      
+      }) 
+
     .catch(err => console.error(err))
 
   })
-
 }
+  
+
+
 
  // https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q=french
 
