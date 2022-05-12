@@ -12,18 +12,23 @@
     <div class ="container">
       <button id="Vincent Van Gogh" onclick="clickHandler('vangogh')">Vincent van Gogh</button>
       <button id="Claude Monet" onclick="clickHandler('monet')">Claude Monet</button>
-      <button id="Andy Warhol" onclick="clickHandler('warhol')">Andy Warhol</button>
-      <button id="Edward Hopper" onclick="clickHandler('hopper')">Edward Hopper</button>
-      <!-- <button onclick='selectArtist()'> Vincent van Gogh </button> -->
+      <button id="Leonardo da Vinci" onclick="clickHandler('vinci')">Leonardo da Vinci</button>
+      <button id="August Renoir" onclick="clickHandler('renoir')">August Renoir</button>
     </div>
-    <div>Please select an artist to see a piece of their work below!</div>
+    <div class="desc">
+      <p>Please select an artist to see a random piece of their work below!</p>
+    </div>
+    <div>
+      <img id="image" width="200px" height="200px">
+    </div>
    </header>
-    
-    <div>Title</div>
-    <div>Date</div>
+
+   
+   <div class = "pcontainer">
+    <p id="title">Title</p>
+    <p id ="date">Date</p>
+   </div>
   </body>
   
   <script src="./artGenerator.js"></script>
 </html>
-
-<!--asdfasd-->

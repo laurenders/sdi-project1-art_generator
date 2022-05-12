@@ -3,59 +3,72 @@
 // Don't need fetch since we are performing fetch request in browser not node, browsers have their own version of fetch
 
 
-/////////////////////////////////////////////////////////////////////////////
-// STEP 1: Get User Input (user clicks Artist button)
-/////////////////////////////////////////////////////////////////////////////
+ 
 
-// Get selection from user click event, which returns an artist 
-// Based on selected artist, append that artist's name to artist URL
 
-let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=' 
+let title = document.getElementById("title");
+let year = document.getElementById("date");
+let imgURL = document.getElementById("image");
+
 
 const clickHandler = (artist) => {
-  // console.log(artist)
-
+  let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q='
   if (artist =='vangogh') {
     artistURL += 'vincent%20van%20gogh'
   } 
+
   else if (artist == 'monet') {
     artistURL += 'claude%20monet'
   }
 
-  else if (artist == 'warhol') {
-    artistURL += 'andy%20warhol'
+  else if (artist == 'vinci') {
+    artistURL += 'leonardo%20da%20vinci'
 
   } else {
-    artistURL += 'edward%20hopper'
+    artistURL += 'august%20renoir'
   }
+
+  // FIRST FETCH
+  fetch(artistURL)
+
+  .then((res) => {
+    console.log(res.status);
+    return res.json();
+  })
+
+  .then(data => {
+    console.log(data)
+    let objectArr = data.objectIDs;
+    console.log(objectArr)
+    let randIndex = Math.floor(Math.random() * objectArr.length);
+    let randObjID = objectArr[randIndex];
+    return randObjID;
+  })
+
+  .then(randObjID => {
+    let artURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randObjID
+
+    // SECOND FETCH
+    fetch(artURL)
+
+      .then((res2) => {
+        return res2.json();
+      })
+
+      .then((data2) => {
+        title.innerHTML = data2.title;
+        year.innerHTML = data2.objectEndDate;
+        imgURL.src = data2.primaryImage;
+        console.log(imgURL);
+
+        return title, year, imgURL
+      })
+      
+    .catch(err => console.error(err))
+
+  })
 
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// STEP 2: Get a list of Object Record IDs for that artist (2 fetches)
-/////////////////////////////////////////////////////////////////////////////
+ 
 
-// Fetch request to the artistURL which returns the list of objectIDs
-
-// Randomly generate a value based on the length of the objectIDs list and select the objectID at that index
-
-
-/////////////////////////////////////////////////////////////////////////////
-// STEP 3 Randomly select an art piece, or objectID from the list
-/////////////////////////////////////////////////////////////////////////////
-
-// Fetch request to the objectRecordURL and return data for the image, title, and year
-
-// let objectRecordURL = https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-// STEP 4: Get artwork image, artwork title, and artwork year
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// STEP 5: Display image, title, and year on webpage
-/////////////////////////////////////////////////////////////////////////////

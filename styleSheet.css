@@ -15,20 +15,42 @@ div.container {
   height: 50px;
   display: inline-flex;
   justify-content: space-evenly;
+  border: 20 px gold;
 }
 
 button {
   width: 200px;
   height: 30px;
-  background-color: #DCC3F0;
+  background-color: #ffce42;
 }
 
 button:hover {
-  background-color:rgb(37, 110, 219);
+  background-color:#432979;
+  color: whitesmoke;
 }
 
-text {
-  background: orange;
+div.pcontainer {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-evenly;
+  border: 20px gold;
+}
+
+img {
+  width: 700px;
+  height: 500px;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 10px gold;
+}
+
+div.desc {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-evenly;
+  border: 10px gold;
 }
 
 div {
@@ -39,8 +61,3 @@ div {
 body {
   background-color: #311175;
 }
-/*
-<div>
-   <text>Centered horizontally and vertically</text>
-</div>
-*/
