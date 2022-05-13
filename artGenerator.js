@@ -3,18 +3,18 @@ let title = document.getElementById("title");
 let year = document.getElementById("date");
 let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
+let description = document.getElementById("description");
 let testImage = '';
+let artistName;
 
 // FUNCTION to show artwork when user clicks button
 const clickHandler = async (button) => {    // can't use await (see below) unless you have async here
-
   let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
 
   if (button === '1') {
     artistURL += 'vincent%20van%20gogh'
     artistName = 'Vincent van Gogh'
   } 
-
   else if (button === '2') {
     artistURL += 'auguste%20rodin'
     artistName = 'Auguste Rodin'
@@ -57,6 +57,7 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
       year.innerHTML = artworkData.objectEndDate;
       artist.innerHTML = artworkData.artistDisplayName;
       imgURL.src = artworkData.primaryImageSmall;
+      description.innerHTML = artworkData.medium;
       break;
     }
     console.log('no image url or no exact name match: trying again')
@@ -66,4 +67,4 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
 clickHandler('1');
 
 
-//module.exports = artGenerator;
+//module.exports = clickHandler;

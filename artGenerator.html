@@ -10,8 +10,13 @@
 
     <header>
     <h1>Welcome to the Virtual Art Generator for the Metropolitan Museum of Art</h1>
+    </header>
 
-    <div class ="container">
+    <div class="desc">
+      <p>Please select an artist to see a random piece of their work below!</p>
+    </div>
+
+    <div class ="button-container">
       <button id="vangogh" onclick="clickHandler('1')">Vincent van Gogh</button>
       <button id="rodin" onclick="clickHandler('2')">Auguste Rodin</button>
       <button id="homer" onclick="clickHandler('3')">Winslow Homer</button>
@@ -19,21 +24,30 @@
       <button id="courbet" onclick="clickHandler('5')">Gustave Courbet</button>
     </div>
 
-    <div class="desc">
-      <p>Please select an artist to see a random piece of their work below!</p>
-    </div>
+    
+    <main>
 
-    <div>
+      <!-- what we had before:  -->
+    <!-- <div class="img-container">
       <img id="image" width="200px" height="200px">
+    </div> -->
+    <p class = title id="title">Title</p>
+    <div class="image-container">
+      <img id="image" src="">
     </div>
-   </header>
+   
 
    
-   <div class = "pcontainer">
-    <p id="title">Title</p>
+   <div class = "art-info-container">
+    
     <p id="artist">Artist</p>
     <p id ="date">Date</p>
    </div>
+   <div class="descrip-container">
+    <p id="description">Description</p>
+   </div>
+
+  </main>
 
   </body>
   
