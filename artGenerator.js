@@ -12,11 +12,11 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
   let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
 
   if (button === '1') {
-    artistURL += 'vincent%20van%20gogh'
+    artistURL += 'vincent van gogh'
     artistName = 'Vincent van Gogh'
   } 
   else if (button === '2') {
-    artistURL += 'auguste%20rodin'
+    artistURL += 'auguste rodin'
     artistName = 'Auguste Rodin'
 
   } else if (button === '3') {
@@ -24,21 +24,25 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
     artistName = 'Winslow Homer'
 
   } else if (button === '4') {
-    artistURL += 'auguste%20renoir'
+    artistURL += 'auguste renoir'
     artistName = 'Auguste Renoir'
 
   } else if (button === '5') {
     artistURL += 'gustave courbet'
     artistName = 'Gustave Courbet'
   }
-  
   // await: returns data from async functions and uses it syncronously
   // await stops and doesn't move on until promise gets resolved, lets you use fetch as if it were syncronous
-  let artistData = await fetch(artistURL)
-    .then(res => res.json())
+  let artistData = await fetch(artistURL)   // using fetch function, which is defined in the browser
+    .then(res => {
+      if (res.status) {
+        return res.json()
+      } else {
+        return res
+      }
+    })
     .then(data => data)
     .catch(err => console.log(err))
-
   let artworkArr = artistData.objectIDs;
 
   // try to get no more than data 15 times
@@ -48,10 +52,15 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
     let artURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randObjID
     
     let artworkData = await fetch(artURL)
-    .then(res => res.json())
-    .then(data => data)
-    .catch(err => console.log(err))
-
+    .then(res => {
+      if (res.status) {
+        return res.json()
+      } else {
+        return res
+      }
+    })
+      .then(data => data)
+      .catch(err => console.log(err))
     if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '') {
       title.innerHTML = artworkData.title;
       year.innerHTML = artworkData.objectEndDate;
@@ -62,9 +71,15 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
     }
     console.log('no image url or no exact name match: trying again')
   }
+  return {artistURL, artistName, title, year, artist, imgURL, description}
 }   
 
-clickHandler('1');
 
 
-//module.exports = clickHandler;
+try { // try to export clickHandler, if it fails, log the error without crashing program
+  module.exports = clickHandler
+
+} catch (err) {
+  console.log(err)
+  clickHandler('1');
+}
