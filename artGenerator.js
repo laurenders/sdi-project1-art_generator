@@ -1,104 +1,69 @@
-// import fetch from 'node-fetch';
-// import fs from "fs";
-// Don't need fetch since we are performing fetch request in browser not node, browsers have their own version of fetch
-
-// for text underneath image
+// setting variables for site elements so we can modify later
 let title = document.getElementById("title");
 let year = document.getElementById("date");
-let artistName = document.getElementById("artist");
+let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
 let testImage = '';
-let keywordName;
 
+// FUNCTION to show artwork when user clicks button
+const clickHandler = async (button) => {    // can't use await (see below) unless you have async here
 
-const clickHandler = (button) => {
+  let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
 
-  let keywordURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
-
-  if (button === 'keyword1') {
-    keywordURL += 'vincent%20van%20gogh'
-    keywordName = 'Vincent van Gogh'
+  if (button === '1') {
+    artistURL += 'vincent%20van%20gogh'
+    artistName = 'Vincent van Gogh'
   } 
 
-  else if (button === 'keyword2') {
-    keywordURL += 'auguste%20rodin'
-    keywordName = 'Auguste Rodin'
+  else if (button === '2') {
+    artistURL += 'auguste%20rodin'
+    artistName = 'Auguste Rodin'
 
-  } else if (button === 'keyword3') {
-    keywordURL += 'donatello'
-    keywordName = 'Donatello'
+  } else if (button === '3') {
+    artistURL += 'winslow homer'
+    artistName = 'Winslow Homer'
 
-  } else if (button === 'keyword4') {
-    keywordURL += 'auguste%20renoir'
-    keywordName = 'Auguste Renoir'
+  } else if (button === '4') {
+    artistURL += 'auguste%20renoir'
+    artistName = 'Auguste Renoir'
+
+  } else if (button === '5') {
+    artistURL += 'gustave courbet'
+    artistName = 'Gustave Courbet'
   }
-
-  ////////////////////////////////////////////////////////////////////////
-  // FIRST FETCH: gives you access to a list of all art pieces for that artist
-  ////////////////////////////////////////////////////////////////////////
   
-  fetch(keywordURL)
+  // await: returns data from async functions and uses it syncronously
+  // await stops and doesn't move on until promise gets resolved, lets you use fetch as if it were syncronous
+  let artistData = await fetch(artistURL)
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => console.log(err))
 
-  .then((res) => {
-    //console.log(res.status);
-    return res.json();
-  })
+  let artworkArr = artistData.objectIDs;
 
-  // start while loop
-
-  .then(data => {
-      //console.log(data)
-      let objectArr = data.objectIDs;
-      //console.log(objectArr)
-      let randIndex = Math.floor(Math.random() * objectArr.length);
-      let randObjID = objectArr[randIndex];
-      return randObjID;
-  })
-
-  .then(randObjID => {
+  // try to get no more than data 15 times
+  for (let i = 0; i < 15; i++) {
+    let randIndex = Math.floor(Math.random() * artworkArr.length);
+    let randObjID = artworkArr[randIndex];
     let artURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randObjID
-
     
-    ////////////////////////////////////////////////////////////////////////
-    // SECOND FETCH: gives you access to information on the selected art piece
-    ////////////////////////////////////////////////////////////////////////
-    
-  fetch(artURL)
+    let artworkData = await fetch(artURL)
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => console.log(err))
 
-      .then((res2) => {
-        return res2.json();
-      })
+    if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '') {
+      title.innerHTML = artworkData.title;
+      year.innerHTML = artworkData.objectEndDate;
+      artist.innerHTML = artworkData.artistDisplayName;
+      imgURL.src = artworkData.primaryImageSmall;
+      break;
+    }
+    console.log('no image url or no exact name match: trying again')
+  }
+}   
 
-      // working with the information about the art piece
-      .then((data2) => {
-        console.log(data2.artistDisplayName);
-
-        if (keywordName === data2.artistDisplayName && data2.primaryImage !== '') {
-          
-          title.innerHTML = data2.title;
-          year.innerHTML = data2.objectEndDate;
-          artistName.innerHTML = data2.artistDisplayName;
-          imgURL.src = data2.primaryImage;
-          console.log(imgURL);
-          return title, year, imgURL, artistName;
-          
-        } else {
-          return;
-        }
-      }) 
-
-    .catch(err => console.error(err))
-
-  })
-}
-  
+clickHandler('1');
 
 
-
- // https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q=french
-
-
-// https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&artistOrCulture=trueq=japan
-
-
-// https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q=french
+//module.exports = artGenerator;
