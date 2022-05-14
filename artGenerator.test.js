@@ -6,12 +6,13 @@ const { document } = (new jsdom.JSDOM(HTML)).window;   // turns the HTML string 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// mocking up a fake fetch function for testing purposes
+// mocking up a fake fetch function for testing purposes, currently only returns van gogh data
 let myFetch = (url) => {
   let data;
   // if the url includes 'artistOrCulture', we treat is as the first fetch for artist data
   if (url.indexOf('artistOrCulture') !== -1) {
     // make this fake data object
+    
     data =  {"total":1,"objectIDs":[459123]}
 
   } else {

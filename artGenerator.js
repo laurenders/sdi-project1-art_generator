@@ -4,7 +4,6 @@ let year = document.getElementById("date");
 let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
 let description = document.getElementById("description");
-let testImage = '';
 let artistName;
 
 // FUNCTION to show artwork when user clicks button
@@ -66,7 +65,8 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
       year.innerHTML = artworkData.objectEndDate;
       artist.innerHTML = artworkData.artistDisplayName;
       imgURL.src = artworkData.primaryImageSmall;
-      description.innerHTML = artworkData.medium;
+      imgURL.className = 'picture-frame'
+      description.innerHTML = '(' + artworkData.medium + ')';
       break;
     }
     console.log('no image url or no exact name match: trying again')

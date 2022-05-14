@@ -1,50 +1,49 @@
 body {
-  background-color: #200a57;
+  background-color: #1f0955;
 }
 
 h1 {
   font-size: 48px;
   width: 100%;
-  height: 125px;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
-  background: #200a57;
   font-family: cursive;
   color: whitesmoke;
+  margin: 0px;
+  margin-top: 20px;
 }
 
 .button-container {
   width: 100%;
-  height: 50px;
   display: inline-flex;
   justify-content: space-evenly;
-  border: 20 px gold;
-  margin-bottom: 20px;
 }
 
 button {
-  width: 200px;
-  height: 30px;
+  width: 220px;
+  height: 35px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-family : inherit;
   font-size: 15px;
   background-color: #0a664f;
   color: whitesmoke;
+  transition: 0.4s;
 }
 
 button:hover {
   background-color:#074636;
   color: whitesmoke;
+  cursor: pointer;
 }
 
-.desc {
+.instructions {
   width: 100%;
   display: inline-flex;
   justify-content: space-evenly;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .title {
@@ -53,16 +52,23 @@ button:hover {
   color: whitesmoke;
   font-family: 'Times New Roman', Times, serif;
   font-size: 30px;
+  margin: 0px;
+  margin-top: 20px;
 }
 
 img {
-  border: 20px ridge goldenrod;
-  width: 700px;
   height: 500px;
-  object-fit: contain;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.picture-frame {
+  border: 20px ridge goldenrod;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -72,17 +78,19 @@ img {
   font-style: italic;
   display: inline-flex;
   justify-content: space-evenly;
-  margin-top:20px;
 }
 
-.descrip-container {
+.medium-container {
   width: 100%;
   font-style: italic;
   display: inline-flex;
   justify-content: center;
+  padding: 0px;
 }
+
 div {
   color: whitesmoke;
   font-size: large;
   font-style: normal;
 }
+
