@@ -12,10 +12,10 @@ The purpose of this project is to create a static webpage which uses the Metropo
 
 ### Setup and Run
 
-1. `npm install` 
-2. `npm test` 
-3. `npm start` 
-4. Server: http://127.0.0.1:8080/
+1. `git clone https://github.com/lenders-game/sdi-project1-art_generator.git`
+2. `npm install` 
+3. `npm start`  
+4. Navigate to live-server at http://127.0.0.1:8080/ and click on artGenerator.html
 
 ### Instructions
 
