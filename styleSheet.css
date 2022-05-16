@@ -9,7 +9,7 @@ h1 {
   justify-content: center;
   text-align: center;
   align-items: center;
-  font-family: cursive;
+  font-family: 'Apple Chancery', 'Brush Script MT', cursive;
   color: whitesmoke;
   margin: 0px;
   margin-top: 20px;
@@ -116,7 +116,7 @@ button:hover {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: whitesmoke;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -148,13 +148,10 @@ input:checked + .slider:before {
 
 img {
   height: 500px;
-  
-  
 }
 
 .picture-frame {
   border: 20px ridge goldenrod;
-  
 }
 
 .img-container {
@@ -162,9 +159,7 @@ img {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  
 }
-
 
 .art-info-container {
   width: 100%;
@@ -182,9 +177,29 @@ img {
   padding: 0px;
 }
 
-div {
-  color: whitesmoke;
-  font-size: large;
-  font-style: normal;
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: 10px;
+  font-style: italic;
+  
 }
 
+#nehemiah {
+  font-family : inherit;
+  margin-right: 5px;
+}
+
+#lauren {
+  font-family : 'Lucida Handwriting', 'Brush Script MT', cursive;
+  margin-right: 5px;
+}
+
+#cybyl {
+  font-family: 'Trattatello', 'Apple Chancery', 'Brush Script MT';
+}
+
+div {
+  color: whitesmoke;
+}

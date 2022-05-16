@@ -5,7 +5,7 @@ let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
 let description = document.getElementById("description");
 let artistName;
-let bannedWords = ["Nude", "nude", "bather", "Bather", "bathing", "Bathing", "bath", "Bath", "Parrot", "Baigneuses", "Wave", "Source"];
+let bannedWords = ["nude", "bather", "bathing", "bath", "parrot", "baigneuses", "wave", "source", "sabbat", "martyr"];
 let on = false;
 let containsBannedWords = false;
 
@@ -73,7 +73,7 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
 
       
         containsBannedWords = bannedWords.some(element => {
-          if (artworkData.title.includes(element)) {
+          if (artworkData.title.toLowerCase().includes(element)) {
             return true;
           }
           return false;
@@ -90,7 +90,7 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
       description.innerHTML = '(' + artworkData.medium + ')';
       break;
     } 
-   } else if(!on) {
+   } else if(!on) { // else the toggle switch is off
     if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '') {
       title.innerHTML = artworkData.title;
       year.innerHTML = artworkData.objectEndDate;
