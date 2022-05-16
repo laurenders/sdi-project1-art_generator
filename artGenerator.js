@@ -5,7 +5,7 @@ let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
 let description = document.getElementById("description");
 let artistName;
-let bannedWords = ["Nude", "bather", "bathing", "bath", "parrot", "Baigneuses", "Wave", "source"];
+let bannedWords = ["Nude", "bather", "Bather", "bathing", "Bathing", "bath", "Bath", "parrot", "Baigneuses", "Wave", "source"];
 
 // FUNCTION to show artwork when user clicks button
 const clickHandler = async (button) => {    // can't use await (see below) unless you have async here
@@ -61,12 +61,16 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
     })
       .then(data => data)
       .catch(err => console.log(err))
+
+      // Look for titles that contain any of the banned words and return true or false
+      // if they do or dont have the words.
       const contains = bannedWords.some(element => {
         if (artworkData.title.includes(element)) {
           return true;
         }
         return false;
       });
+      
     if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '' && !contains) {
       title.innerHTML = artworkData.title;
       year.innerHTML = artworkData.objectEndDate;
@@ -80,8 +84,6 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
   }
   return {artistURL, artistName, title, year, artist, imgURL, description}
 }   
-//Filter:
-//contains: Nude, bather, bathing, bath, parrot, Baigneuses, source, Witch's sabbath
 
 try { // try to export clickHandler, if it fails, log the error without crashing program
   module.exports = clickHandler

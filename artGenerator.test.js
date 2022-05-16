@@ -1,6 +1,6 @@
-const fs = require('fs')
-const HTML = fs.readFileSync('./artGenerator.html', 'utf-8')  // this is a string with text from HTML file
-const jsdom = require("jsdom");
+const fs = require('fs')    // import file system module
+const HTML = fs.readFileSync('./artGenerator.html', 'utf-8')  // read in a string with text from HTML file
+const jsdom = require("jsdom");   // import jsdom
 const { document } = (new jsdom.JSDOM(HTML)).window;   // turns the HTML string into an HTML document object that you can access
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,11 +14,11 @@ let myFetch = (url) => {
   if (url.indexOf('artistOrCulture') !== -1) {
     // make this fake data object
     
-    data =  {"total":1,"objectIDs":[459123]}
+    data =  {"total":1,"objectIDs":[459123]}    // one of Van Gogh's artwork pieces
 
   } else {
     // else we treat it as the second fetch for artwork data
-    data = {
+    data = {  // artwork information for that specified piece
       "primaryImageSmall":"https://images.metmuseum.org/CRDImages/rl/web-large/DT3154.jpg",
       "title":"Madame Roulin and Her Baby",
       "artistDisplayName":"Vincent van Gogh",
