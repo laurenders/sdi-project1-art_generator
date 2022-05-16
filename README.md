@@ -1,6 +1,8 @@
 # SDI Project 1: Art Generator
 
-This project is for a static webpage which connects to the Metropolitan Museum of Art API and displays a random piece of artwork from a selected artist as well as supporting information.
+### Overview
+
+The purpose of this project is to create a static webpage which uses the Metropolitan Museum of Art API to display random piece of artwork from a selected artist as well as supporting information. Please follow the links below to learn more about our project.
 
 - Wireframe: https://www.figma.com/file/SfLm4EQo4KOiQaykG9ye66/Met-Artwork-Webpage?node-id=0%3A1
 
@@ -8,7 +10,16 @@ This project is for a static webpage which connects to the Metropolitan Museum o
 
 - API: https://metmuseum.github.io/
 
+### Setup and Run
 
+1. `npm install` 
+2. `npm test` 
+3. `npm start` 
+4. Server: http://127.0.0.1:8080/
+
+### Instructions
+
+Welcome to the virtual art generator for the Metropolitan Museum of Art! Click on any artist button to see a random piece of their artwork.
 
 
 

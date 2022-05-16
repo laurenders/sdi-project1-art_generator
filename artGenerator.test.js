@@ -8,6 +8,7 @@ const { document } = (new jsdom.JSDOM(HTML)).window;   // turns the HTML string 
 
 // mocking up a fake fetch function for testing purposes, currently only returns van gogh data
 let myFetch = (url) => {
+
   let data;
   // if the url includes 'artistOrCulture', we treat is as the first fetch for artist data
   if (url.indexOf('artistOrCulture') !== -1) {
@@ -84,7 +85,7 @@ describe('Test Suite 1: Describe the click handler function', () => {
 
   test('should set description HTML element correctly', async () => {
     ({artistURL, artistName, title, year, artist, imgURL, description} = await clickHandler('1'))
-    expect(description.innerHTML).toBe('Oil on canvas')
+    expect(description.innerHTML).toBe('(Oil on canvas)')
   })
 
   test('should append artistName to URL', async () => {
