@@ -5,12 +5,18 @@ let artist = document.getElementById("artist");
 let imgURL = document.getElementById("image");
 let description = document.getElementById("description");
 let artistName;
-let bannedWords = ["Nude", "bather", "Bather", "bathing", "Bathing", "bath", "Bath", "parrot", "Baigneuses", "Wave", "source"];
+let bannedWords = ["Nude", "nude", "bather", "Bather", "bathing", "Bathing", "bath", "Bath", "Parrot", "Baigneuses", "Wave", "Source"];
+let on = false;
+let containsBannedWords = false;
+
 
 // FUNCTION to show artwork when user clicks button
 const clickHandler = async (button) => {    // can't use await (see below) unless you have async here
   let artistURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q='
 
+  // Check if toggle switch is on or off
+  on = document.getElementsByClassName("switch-type")[0].checked ? true : false;
+  
   if (button === '1') {
     artistURL += 'vincent van gogh'
     artistName = 'Vincent van Gogh'
@@ -64,14 +70,18 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
 
       // Look for titles that contain any of the banned words and return true or false
       // if they do or dont have the words.
-      const contains = bannedWords.some(element => {
-        if (artworkData.title.includes(element)) {
-          return true;
-        }
-        return false;
-      });
+
       
-    if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '' && !contains) {
+        containsBannedWords = bannedWords.some(element => {
+          if (artworkData.title.includes(element)) {
+            return true;
+          }
+          return false;
+        });
+      
+      
+   if(on) {// if the toggle switch is on do this first if
+    if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '' && !containsBannedWords) {
       title.innerHTML = artworkData.title;
       year.innerHTML = artworkData.objectEndDate;
       artist.innerHTML = artworkData.artistDisplayName;
@@ -79,7 +89,18 @@ const clickHandler = async (button) => {    // can't use await (see below) unles
       imgURL.className = 'picture-frame'
       description.innerHTML = '(' + artworkData.medium + ')';
       break;
-    }
+    } 
+   } else if(!on) {
+    if (artistName === artworkData.artistDisplayName && artworkData.primaryImageSmall !== '') {
+      title.innerHTML = artworkData.title;
+      year.innerHTML = artworkData.objectEndDate;
+      artist.innerHTML = artworkData.artistDisplayName;
+      imgURL.src = artworkData.primaryImageSmall;
+      imgURL.className = 'picture-frame'
+      description.innerHTML = '(' + artworkData.medium + ')';
+      break;
+    } 
+   }
     console.log('no image url or no exact name match: trying again')
   }
   return {artistURL, artistName, title, year, artist, imgURL, description}
